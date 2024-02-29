@@ -4,8 +4,9 @@ import axios from "axios";
 
 
 
-const api = () => {
 
+const Api      = () => {
+  const [texte, setTexte] = useState("")
   const [liste,setListe] = useState([
    
     {
@@ -18,22 +19,39 @@ const api = () => {
   ]);
   useEffect(()=>{
 
-  
-    console.log("Démarrage de l'appli")
-    axios.get('http://api.themoviedb.org/3/search/movie?api_key=f33cd318f5135dba306176c13104506a&query=avenger'),
-    {
+    axios.get('http://api.themoviedb.org/3/search/movie?api_key=f33cd318f5135dba306176c13104506a&query=avenger' ,  {
       Headers: {"Accept":"application/json"}
-    }
+    }).then(
+     (reponse)=>{
+      console.log(reponse.data.results);
+       // Ajouter le nouvel élément à la liste
+      setListe(reponse.data.results);
+     }
+    )
+
+    //console.log("Démarrage de l'application...")
+       
+  
   },[])
 
   return (
       <>
         <h2>Exercice API</h2>
+        <input
+        type="texte"
+        value={texte}
+        onChange={(reponse) => setListe(e.data.results)}
+       
+      />
+      
+      <button onClick={handleAjouterElement}>Ajouter</button>
         <div>
-         {liste.map((themovie)=>(
-          <div>{themovie.title}</div>
+         {liste.map((themovie,index)=>(
+          <div  key={index}>{themovie.title}</div>
          ))}
       </div>
+
+      
       </>
     );
 }

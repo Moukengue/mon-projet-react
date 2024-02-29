@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import axios from "axios";
+
+
+
+
+
 const Exo1 = () => {
   const [nom, setNom] = useState('');
   const [prenom, setPrenom] = useState('');
